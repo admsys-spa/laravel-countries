@@ -6,15 +6,10 @@
 
 Laravel Countries is a bundle for Laravel, providing Almost ISO 3166_2, 3166_3, currency, Capital and more for all countries.
 
-**Please note that version 1.4 is Laravel 5 only, older versions of Laravel should use version 1.3.4 instead**
 
 ## Installation
 
-Add `admsys/laravel-countries` to `composer.json`.
-
-    "admsys/laravel-countries": "dev-master"
-
-Run `composer update` to pull down the latest version of Country List.
+    composer require admsys/laravel-countries
 
 Edit `app/config/app.php` and add the `provider` and `filter`
 
