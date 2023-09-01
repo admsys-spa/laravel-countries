@@ -1,6 +1,6 @@
 <?php
 
-namespace Webpatser\Countries;
+namespace Admsys\Countries;
 
 use Illuminate\Support\ServiceProvider;
 
@@ -81,4 +81,3 @@ class CountriesServiceProvider extends ServiceProvider {
         return ['countries'];
     }
 }
-

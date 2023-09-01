@@ -1,6 +1,6 @@
 <?php
 
-namespace Webpatser\Countries;
+namespace Admsys\Countries;
 
 use Illuminate\Support\Facades\Facade;
 

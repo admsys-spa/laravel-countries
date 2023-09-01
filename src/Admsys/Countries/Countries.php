@@ -1,6 +1,6 @@
 <?php
 
-namespace Webpatser\Countries;
+namespace Admsys\Countries;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -9,28 +9,29 @@ use Illuminate\Database\Eloquent\Model;
  *
  */
 class Countries extends Model {
-    
+
     /**
      * @var array
      */
     protected $countries = [];
-    
+
     /**
      * @var string
      * The table for the countries in the database, is "countries" by default.
      */
     protected $table;
-    
+
     /**
      * Constructor.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(array $attributes = [])
     {
+        parent::__construct($attributes);
         $this->table = \Config::get('countries.table_name');
     }
-    
+
     /**
      * Get the countries from the JSON file, if it hasn't already been loaded.
      *
@@ -42,11 +43,11 @@ class Countries extends Model {
         if (is_null($this->countries) || empty($this->countries)) {
             $this->countries = json_decode(file_get_contents(__DIR__ . '/Models/countries.json'), true);
         }
-        
+
         //Return the countries
         return $this->countries;
     }
-    
+
     /**
      * Returns one country
      *
@@ -59,7 +60,7 @@ class Countries extends Model {
         $countries = $this->getCountries();
         return $countries[$id];
     }
-    
+
     /**
      * Returns a list of countries
      *
@@ -71,7 +72,7 @@ class Countries extends Model {
     {
         //Get the countries list
         $countries = $this->getCountries();
-        
+
         //Sorting
         $validSorts = [
             'capital',
@@ -91,7 +92,7 @@ class Countries extends Model {
             'currency_symbol',
             'flag',
         ];
-        
+
         if (!is_null($sort) && in_array($sort, $validSorts)){
             uasort($countries, function($a, $b) use ($sort) {
                 if (!isset($a[$sort]) && !isset($b[$sort])){
@@ -105,11 +106,11 @@ class Countries extends Model {
                 }
             });
         }
-        
+
         //Return the countries
         return $countries;
     }
-    
+
     /**
      * Returns a list of countries suitable to use with a select element in Laravelcollective\html
      * Will show the value and sort by the column specified in the display attribute
@@ -123,7 +124,7 @@ class Countries extends Model {
         foreach ($this->getList($display) as $key => $value) {
             $countries[$key] = $value[$display];
         }
-        
+
         //return the array
         return $countries;
     }
