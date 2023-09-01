@@ -1,55 +1,61 @@
 {
-	"name" : "admsys/laravel-countries",
-	"description" : "Laravel Countries is a bundle for Laravel, providing Almost ISO 3166_2, 3166_3, currency, Capital and more for all countries.",
-	"authors" : [{
-			"name" : "Christoph Kempen",
-			"email" : "christoph@downsized.nl",
-			"homepage" : "http://downsized.nl/",
-			"role" : "developer"
-		}, {
-			"name" : "Paul Kievits",
-			"role" : "developer"
-		},
+    "name": "admsys/laravel-countries",
+    "description": "Laravel Countries is a bundle for Laravel, providing Almost ISO 3166_2, 3166_3, currency, Capital and more for all countries.",
+    "authors": [
         {
-			"name" : "adiazm",
-            "homepage" : "https://admsys.cl/",
-			"role" : "developer"
-		}
-	],
-	"keywords" : [
-		"laravel",
-		"countries",
-		"iso_3166_2",
-		"iso_3166_3"
-	],
-	"homepage" : "https://github.com/admsys/laravel-countries",
-	"license" : [
-		"MIT"
-	],
-	"require" : {
-		"php" : ">=5.3.0"
-	},
-	"autoload" : {
-		"psr-0" : {
-			"Admsys\\Countries" : "src/"
-		},
-		"classmap" : [
-			"src/commands"
-		]
-	},
-	"minimum-stability" : "dev",
-	"support" : {
-		"source" : "https://github.com/admsys/laravel-countries",
-		"issues" : "https://github.com/admsys/laravel-countries/issues"
-	},
-	"extra": {
-	    "laravel": {
-		"providers": [
-		    "Admsys\\Countries\\CountriesServiceProvider"
-		],
-		"aliases": {
-		    "Countries": "Admsys\\Countries\\CountriesFacade"
-		}
-	    }
-	}
+            "name": "Christoph Kempen",
+            "email": "christoph@downsized.nl",
+            "homepage": "http://downsized.nl/",
+            "role": "developer"
+        },
+        {
+            "name": "Paul Kievits",
+            "role": "developer"
+        },
+        {
+            "name": "adiazm",
+            "homepage": "https://admsys.cl/",
+            "role": "developer"
+        }
+    ],
+    "keywords": [
+        "laravel",
+        "countries",
+        "iso_3166_2",
+        "iso_3166_3"
+    ],
+    "homepage": "https://github.com/admsys/laravel-countries",
+    "license": [
+        "MIT"
+    ],
+    "require": {
+        "php": ">=5.3.0"
+    },
+    "autoload": {
+        "psr-0": {
+            "Admsys\\Countries": "src/"
+        },
+        "psr-4": {
+            "Admsys\\Countries": "src/"
+        },
+        "classmap": [
+            "src/commands"
+        ]
+    },
+    "support": {
+        "source": "https://github.com/admsys/laravel-countries",
+        "issues": "https://github.com/admsys/laravel-countries/issues"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Admsys\\Countries\\CountriesServiceProvider"
+            ],
+            "aliases": {
+                "Countries": "Admsys\\Countries\\CountriesFacade"
+            }
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
