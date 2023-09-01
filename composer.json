@@ -36,7 +36,7 @@
             "Admsys\\Countries": "src/"
         },
         "psr-4": {
-            "Admsys\\Countries": "src/"
+            "Admsys\\Countries\\": "src/"
         },
         "classmap": [
             "src/commands"
