@@ -7,8 +7,8 @@ use Illuminate\Support\ServiceProvider;
 /**
  * CountryListServiceProvider
  */
-class CountriesServiceProvider extends ServiceProvider {
-
+class CountriesServiceProvider extends ServiceProvider
+{
     /**
      * Indicates if loading of the provider is deferred.
      *
@@ -17,19 +17,18 @@ class CountriesServiceProvider extends ServiceProvider {
     protected $defer = false;
 
     /**
-    * Bootstrap the application.
-    *
-    * @return void
-    */
-
+     * Bootstrap the application.
+     *
+     * @return void
+     */
     public function boot()
     {
         // The publication files to publish
-        $this->publishes([__DIR__ . '/../../config/config.php' => config_path('countries.php')]);
+        $this->publishes([__DIR__.'/../../config/config.php' => config_path('countries.php')]);
 
         // Append the country settings
         $this->mergeConfigFrom(
-            __DIR__ . '/../../config/config.php', 'countries'
+            __DIR__.'/../../config/config.php', 'countries'
         );
     }
 
@@ -51,8 +50,7 @@ class CountriesServiceProvider extends ServiceProvider {
      */
     public function registerCountries()
     {
-        $this->app->bind('countries', function($app)
-        {
+        $this->app->bind('countries', function ($app) {
             return new Countries();
         });
     }

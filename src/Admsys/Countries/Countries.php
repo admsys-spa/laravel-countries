@@ -6,10 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * CountryList
- *
  */
-class Countries extends Model {
-
+class Countries extends Model
+{
     /**
      * @var array
      */
@@ -41,7 +40,7 @@ class Countries extends Model {
     {
         //Get the countries from the JSON file
         if (is_null($this->countries) || empty($this->countries)) {
-            $this->countries = json_decode(file_get_contents(__DIR__ . '/Models/countries.json'), true);
+            $this->countries = json_decode(file_get_contents(__DIR__.'/Models/countries.json'), true);
         }
 
         //Return the countries
@@ -51,13 +50,13 @@ class Countries extends Model {
     /**
      * Returns one country
      *
-     * @param string $id The country id
-     *
+     * @param  string  $id The country id
      * @return array
      */
     public function getOne($id)
     {
         $countries = $this->getCountries();
+
         return $countries[$id];
     }
 
@@ -65,7 +64,6 @@ class Countries extends Model {
      * Returns a list of countries
      *
      * @param string sort
-     *
      * @return array
      */
     public function getList($sort = null)
@@ -93,13 +91,13 @@ class Countries extends Model {
             'flag',
         ];
 
-        if (!is_null($sort) && in_array($sort, $validSorts)){
-            uasort($countries, function($a, $b) use ($sort) {
-                if (!isset($a[$sort]) && !isset($b[$sort])){
+        if (! is_null($sort) && in_array($sort, $validSorts)) {
+            uasort($countries, function ($a, $b) use ($sort) {
+                if (! isset($a[$sort]) && ! isset($b[$sort])) {
                     return 0;
-                } elseif (!isset($a[$sort])){
+                } elseif (! isset($a[$sort])) {
                     return -1;
-                } elseif (!isset($b[$sort])){
+                } elseif (! isset($b[$sort])) {
                     return 1;
                 } else {
                     return strcasecmp($a[$sort], $b[$sort]);
@@ -116,7 +114,6 @@ class Countries extends Model {
      * Will show the value and sort by the column specified in the display attribute
      *
      * @param string display
-     *
      * @return array
      */
     public function getListForSelect($display = 'name')

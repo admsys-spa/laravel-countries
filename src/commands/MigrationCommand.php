@@ -6,13 +6,13 @@ use Illuminate\Console\Command;
 
 class MigrationCommand extends Command
 {
-
     /**
      * The console command name.
      *
      * @var string
      */
     protected $name = 'countries:migration';
+
     protected $signature = 'countries:migration';
 
     /**
@@ -31,7 +31,7 @@ class MigrationCommand extends Command
     {
         parent::__construct();
         $app = app();
-        $app['view']->addNamespace('countries', substr(__DIR__, 0, -8) . 'views');
+        $app['view']->addNamespace('countries', substr(__DIR__, 0, -8).'views');
     }
 
     /**
@@ -46,18 +46,18 @@ class MigrationCommand extends Command
 
         $this->line('');
 
-        if ($this->confirm("Proceed with the migration creation? [Yes|no]")) {
+        if ($this->confirm('Proceed with the migration creation? [Yes|no]')) {
             $this->line('');
 
-            $this->info("Creating migration and seeder...");
+            $this->info('Creating migration and seeder...');
             if ($this->createMigration('countries')) {
                 $this->line('');
 
-                $this->info("Migration successfully created!");
+                $this->info('Migration successfully created!');
             } else {
                 $this->error(
-                    "Coudn't create migration.\n Check the write permissions" .
-                        " within the app/database/migrations directory."
+                    "Coudn't create migration.\n Check the write permissions".
+                        ' within the app/database/migrations directory.'
                 );
             }
 
@@ -78,7 +78,7 @@ class MigrationCommand extends Command
     /**
      * Create the migration
      *
-     * @param  string $name
+     * @param  string  $name
      * @return bool
      */
     protected function createMigration()
@@ -86,19 +86,19 @@ class MigrationCommand extends Command
         //Create the migration
         $app = app();
         $migrationFiles = [
-            $this->laravel->path . "/../database/migrations/*_setup_countries_table.php" => 'countries::generators.migration',
-            $this->laravel->path . "/../database/migrations/*_charify_countries_table.php" => 'countries::generators.char_migration',
+            $this->laravel->path.'/../database/migrations/*_setup_countries_table.php' => 'countries::generators.migration',
+            $this->laravel->path.'/../database/migrations/*_charify_countries_table.php' => 'countries::generators.char_migration',
         ];
 
         $seconds = 0;
 
         foreach ($migrationFiles as $migrationFile => $outputFile) {
-            if (sizeof(glob($migrationFile)) == 0) {
-                $migrationFile = str_replace('*', date('Y_m_d_His', strtotime('+' . $seconds . ' seconds')), $migrationFile);
+            if (count(glob($migrationFile)) == 0) {
+                $migrationFile = str_replace('*', date('Y_m_d_His', strtotime('+'.$seconds.' seconds')), $migrationFile);
 
                 $fs = fopen($migrationFile, 'x');
                 if ($fs) {
-                    $output = "<?php\n\n" . $app['view']->make($outputFile)->with('table', 'countries')->render();
+                    $output = "<?php\n\n".$app['view']->make($outputFile)->with('table', 'countries')->render();
 
                     fwrite($fs, $output);
                     fclose($fs);
@@ -111,31 +111,31 @@ class MigrationCommand extends Command
         }
 
         //Create the seeder
-        $seeder_directory = $this->laravel->path . "/../database/seeds";
+        $seeder_directory = $this->laravel->path.'/../database/seeds';
 
-        $seeder_file = $seeder_directory . "/CountriesSeeder.php";
+        $seeder_file = $seeder_directory.'/CountriesSeeder.php';
 
         $laravel_major_version = (int) app()->version();
 
-        $output = "<?php\n\n" . $app['view']->make('countries::generators.seeder')->render();
+        $output = "<?php\n\n".$app['view']->make('countries::generators.seeder')->render();
 
         if ($laravel_major_version >= 8) {
 
             $old_seeder_directory = $seeder_directory;
 
-            $seeder_directory = $this->laravel->path . "/../database/seeders";
+            $seeder_directory = $this->laravel->path.'/../database/seeders';
 
-            $seeder_file = $seeder_directory . "/CountriesSeeder.php";
+            $seeder_file = $seeder_directory.'/CountriesSeeder.php';
 
-            if (!is_dir($seeder_directory)) {
+            if (! is_dir($seeder_directory)) {
                 /* Directory does not exist, rename seeds folder to seeders. */
                 rename($old_seeder_directory, $seeder_directory);
             }
 
-            $output = "<?php\n\n" . $app['view']->make('countries::generators.seeder=>8')->render();
+            $output = "<?php\n\n".$app['view']->make('countries::generators.seeder=>8')->render();
         }
 
-        if (!file_exists($seeder_file)) {
+        if (! file_exists($seeder_file)) {
             $fs = fopen($seeder_file, 'x');
             if ($fs) {
                 fwrite($fs, $output);
